@@ -25,20 +25,40 @@ def facture_word(liste_produits, total_general):
     
     
 # Format de la facture PDF
+from fpdf import FPDF
+
+from fpdf import FPDF
+
 def facture_pdf(liste_produits, total_general):
-    from fpdf import FPDF
     pdf = FPDF()
     pdf.add_page()
     pdf.set_font("Arial", size=12)
+
+    # 🏪 Titre
     pdf.cell(200, 10, txt="KING'S STORE", ln=1, align="C")
     pdf.cell(200, 10, txt="Produits achetés", ln=1, align="C")
+
+    # 📦 Liste des produits
     for produit in liste_produits:
-        pdf.cell(200, 10, txt=f"{produit['nom']}, \n - Quantité : {produit['quantite']}, Prix unitaire : {produit['prix_unitaire']}€, Total : {produit['total']}€", ln=1, align="C")
+        texte = f"{produit['nom']}, Quantité : {produit['quantite']}, Prix unitaire : {produit['prix_unitaire']}€, Total : {produit['total']}€"
         
+        # ✅ Remplacement des caractères spéciaux
+        texte = texte.encode("latin-1", "replace").decode("latin-1")  
         
-    pdf.cell(200, 10, txt=f"Total général : {total_general} €.", ln=1, align="C")
-    pdf.output("facture.pdf")
-    print("Facture enregistrée sous format PDF.")
+        pdf.set_font("Arial", "", 12)  # Assurer la police avant chaque texte
+        pdf.multi_cell(0, 10, txt=texte)  # multi_cell gère les longues lignes
+    
+    # 💰 Total général
+    total_texte = f"Total général : {total_general} €."
+    total_texte = total_texte.encode("latin-1", "replace").decode("latin-1")  # Sécuriser l'encodage
+    pdf.set_font("Arial", "", 12)
+    pdf.cell(200, 10, txt=total_texte, ln=1, align="C")
+
+    # 📄 Sauvegarde du fichier PDF
+    pdf.output("facture.pdf", "F")
+    print("✅ Facture enregistrée sous format PDF.")
+
+
     
     
 # Format de la facture Excel
