@@ -1,10 +1,11 @@
 from produits.produis import liste_produits, total_general, ajout_produit
+from facture.facture import facture_txt, facture_word, facture_pdf, facture_excel
 
 
 while True:
    
     print("== Bienvenue au KING'S STORE ==")
-    print("1. Faire des achats\n2. Voir les achats dans mon panier\n3. Quitter")
+    print("1. Faire des achats\n2. Voir les achats dans mon panier\n3. Gérer une facture\n4. Quitter")
     choix = input("Entrez votre choix: ")
 
     if choix == "1":
@@ -51,8 +52,36 @@ while True:
         afficher_produits(liste_produits)
         print("")
         print("Merci de votre achat!")
-
+        
     elif choix == "3":
+        while True:
+            print("== Gérer une facture ==")
+            print("1. Sous format TXT\n2 . Sous format Word\n3. Sous format PDF\n4. Sous format Excel\n5. Retour")
+            choix_facture = input("Entrez votre choix: ")
+
+            if choix_facture == "1":
+                print("Sous format TXT")
+                facture_txt(liste_produits, total_general)
+                
+            elif choix_facture == "2":
+                print("Sous format Word")
+                facture_word(liste_produits, total_general)
+                
+            elif choix_facture == "3":
+                print("Sous format PDF")
+                facture_pdf(liste_produits, total_general)
+                
+            elif choix_facture == "4":
+                print("Sous format Excel")
+                facture_excel(liste_produits, total_general)
+                
+            elif choix_facture == "5":
+                break
+
+            else:
+                print("Choix invalide. Veuillez réessayer.")
+
+    elif choix == "4":
         print("Au revoir!")
         break
 
