@@ -1,8 +1,10 @@
-liste_produits = []  # Liste pour stocker les produits
-total_general = 0  # Variable pour le total de tous les prix
+from produits.produis import liste_produits, total_general, ajout_produit
+
 
 while True:
-    print("1. Faire des achats\n2. Consulter le solde\n3. Quitter")
+   
+    print("== Bienvenue au KING'S STORE ==")
+    print("1. Faire des achats\n2. Voir les achats dans mon panier\n3. Quitter")
     choix = input("Entrez votre choix: ")
 
     if choix == "1":
@@ -20,32 +22,35 @@ while True:
 
             # Calcul du total pour ce produit
             total_produit = entrer_quantite * entrer_prix
-
-            # Ajout du produit à la liste
-            liste_produits.append({
-                "nom": entrer_produit,
-                "quantite": entrer_quantite,
-                "prix_unitaire": entrer_prix,
-                "total": total_produit
-            })
+            
+            # Utilisation de la fonction ajout_produit
+            liste_produits = ajout_produit(liste_produits, entrer_produit, entrer_quantite, entrer_prix, total_produit)
+            print(liste_produits)
 
             # Mise à jour du total général
             total_general += total_produit
             print("")
-            print(f"Vous avez ajouté {entrer_quantite} de {entrer_produit} au prix de {entrer_prix} euros chacun.")
-            print(f"Total pour ce produit : {total_produit} euros.")
-            print("Merci pour votre achat!")
+            
+            # Affichage du produit ajouté
+            print("Les produits ont été ajoutés avec succès.")
+            print(f" Nom du produit: {entrer_produit}\n Quantité: {entrer_quantite}\n Prix unitaire: {entrer_prix}€\n Total: {total_produit}€")
             print("")
-
+            
         except ValueError:
             print("Veuillez entrer un nombre valide.")
             continue
 
     elif choix == "2":
+        print("")
         print("Produits achetés :")
-        for produit in liste_produits:
-            print(f"- {produit['nom']}: {produit['quantite']} x {produit['prix_unitaire']}€ = {produit['total']}€")
-        print(f"Total général : {total_general} €.")
+        def afficher_produits(liste_produits):
+            for produit in liste_produits:
+                print(f"{produit['nom']}, \n - Quantité : {produit['quantite']}, Prix unitaire : {produit['prix_unitaire']}€, Total : {produit['total']}€")
+            print(f"Total général : {total_general} €.")
+            
+        afficher_produits(liste_produits)
+        print("")
+        print("Merci de votre achat!")
 
     elif choix == "3":
         print("Au revoir!")
