@@ -67,6 +67,15 @@ def facture_pdf(liste_produits, total_general):
 # Format de la facture Excel
 def facture_excel(liste_produits, total_general):
     import pandas as pd
+
     df = pd.DataFrame(liste_produits)
+
+    # Crée une nouvelle ligne avec le total général.  Adaptez les clés selon la structure de votre liste_produits.
+    total_row = {'Nom du produit': 'TOTAL GENERAL', 'Prix': '', 'Quantité': '', 'Total': total_general} # Adaptez les noms de colonnes si nécessaire
+
+    # Convertit la nouvelle ligne en Series et l'ajoute au DataFrame
+    df = pd.concat([df, pd.DataFrame([total_row])], ignore_index=True)
+
+
     df.to_excel("facture.xlsx", index=False)
     print("Facture enregistrée sous format Excel.")
