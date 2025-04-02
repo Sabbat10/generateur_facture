@@ -173,9 +173,8 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
-.facture.txt
-.facture.docx
-.facture.pdf
-.facture.html
-.facture.csv
-.facture.xlsx
+# Ignorer les fichiers texte et documents
+*.txt
+*.docx
+*.pdf
+*.xlsx

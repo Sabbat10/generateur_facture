@@ -25,7 +25,7 @@ while True:
             total_produit = entrer_quantite * entrer_prix
             
             # Utilisation de la fonction ajout_produit
-            liste_produits = ajout_produit(liste_produits, entrer_produit, entrer_quantite, entrer_prix, total_produit)
+            liste_des_produits = ajout_produit(liste_produits, entrer_produit, entrer_quantite, entrer_prix, total_produit)
             print(liste_produits)
 
             # Mise à jour du total général
@@ -49,9 +49,10 @@ while True:
                 print(f"{produit['nom']}, \n - Quantité : {produit['quantite']}, Prix unitaire : {produit['prix_unitaire']}€, Total : {produit['total']}€")
             print(f"Total général : {total_general} €.")
             
-        afficher_produits(liste_produits)
+        afficher_produits(liste_des_produits)
         print("")
         print("Merci de votre achat!")
+        print("")
         
     elif choix == "3":
         while True:

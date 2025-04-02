@@ -1,13 +1,10 @@
-
-
-# Format de la facture txt
 def facture_txt(liste_produits, total_general):
-    open("facture.txt", "w").write("KING'S STORE :\n")
-    for produit in liste_produits:
-        open("facture.txt", "w").write("Produits achetés :\n")
-        open("facture.txt", "a").write(f"{produit['nom']}, \n - Quantité : {produit['quantite']}, Prix unitaire : {produit['prix_unitaire']}€, Total : {produit['total']}€\n")
-    open("facture.txt", "a").write(f"Total général : {total_general} €.\n")
-    print("Facture enregistrée sous format TXT.")
+    with open("facture.txt", "w", encoding="utf-8") as f:
+        f.write("KING'S STORE :\nProduits achetés :\n")
+        for produit in liste_produits:
+            f.write(f"{produit['nom']}, \n - Quantité : {produit['quantite']}, Prix unitaire : {produit['prix_unitaire']}€, Total : {produit['total']}€\n")
+        f.write(f"Total général : {total_general} €.\n")
+    print("Facture générée sous format TXT.")
     
     
     
