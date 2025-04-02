@@ -41,7 +41,7 @@ def facture_pdf(liste_produits, total_general):
 
     # 📦 Liste des produits
     for produit in liste_produits:
-        texte = f"{produit['nom']}, Quantité : {produit['quantite']}, Prix unitaire : {produit['prix_unitaire']}€, Total : {produit['total']}€"
+        texte = f"{produit['nom']}, \n  - Quantité : {produit['quantite']}, Prix unitaire : {produit['prix_unitaire']}€, Total : {produit['total']}€"
         
         # ✅ Remplacement des caractères spéciaux
         texte = texte.encode("latin-1", "replace").decode("latin-1")  
@@ -54,6 +54,8 @@ def facture_pdf(liste_produits, total_general):
     total_texte = total_texte.encode("latin-1", "replace").decode("latin-1")  # Sécuriser l'encodage
     pdf.set_font("Arial", "", 12)
     pdf.cell(200, 10, txt=total_texte, ln=1, align="C")
+    
+    pdf.image("img1.jpg", x=10, y=8, w=33)  # Ajouter le logo
 
     # 📄 Sauvegarde du fichier PDF
     pdf.output("facture.pdf", "F")
