@@ -11,19 +11,23 @@ def facture_txt(liste_produits, total_general):
 # Format de la facture Word
 def facture_word(liste_produits, total_general):
     from docx import Document
+    from docx.enum.style import WD_STYLE_TYPE
+
     document = Document()
-    document.add_heading("KING'S STORE", level=1)
-    document.add_paragraph("Produits achetés :")
+    document.add_heading("KING'S STORE", 0)
+    document.add_heading("Produits achetés :", level=3)
+    
+    style_produit = "Normal"
+    
     for produit in liste_produits:
-        document.add_paragraph(f"{produit['nom']}, \n - Quantité : {produit['quantite']}, Prix unitaire : {produit['prix_unitaire']}€, Total : {produit['total']}€")
+        document.add_paragraph(f"{produit['nom']}, \n - Quantité : {produit['quantite']}, Prix unitaire : {produit['prix_unitaire']}€, Total : {produit['total']}€", style=style_produit)
+    document.add_paragraph("\n")
     document.add_paragraph(f"Total général : {total_general} €.")
     document.save("facture.docx")
     print("Facture enregistrée sous format Word.")
     
     
 # Format de la facture PDF
-from fpdf import FPDF
-
 from fpdf import FPDF
 
 def facture_pdf(liste_produits, total_general):
